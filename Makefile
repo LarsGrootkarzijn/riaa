@@ -91,4 +91,11 @@ uninstall:
 	@echo "Uninstalled RIAA plugins"
 
 deb:
-	dpkg-buildpackage -us -uc -b
+	sbuild \
+		--chroot-mode=unshare \
+		--no-clean-source \
+		--enable-network \
+		$(DIST_ARG) \
+		$(CHROOT_ARG) \
+		--build-dir="$(BUILD_DIR)" \
+		--verbose
